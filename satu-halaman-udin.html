@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .current-page {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .another-page-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .another-page {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .another-page:hover {
+      filter: brightness(80%);
+      cursor: pointer;
+    }
+    .fadein {
+      animation: fadein .5s;
+    }
+    @keyframes fadein {
+      from { filter: blur(50px); }
+      to { filter: blur(0); }
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <img class="current-page" id="current-page" src="udin.jpeg" alt="">
+  <div class="another-page-container">
+    <img class="another-page" src="istri-udin.jpeg" alt="">
+    <img class="another-page" src="anak-udin.jpeg" alt="">
+  </div>
+
+  <script>
+    const anotherpage = document.querySelectorAll('.another-page')
+    
+    anotherpage.forEach( ap => ap.addEventListener('click', e => {
+      const currentpage = document.querySelector('#current-page')
+      const currentsrc = currentpage.src
+      const targetsrc = e.target.src
+      e.target.src = currentsrc
+      currentpage.src = targetsrc
+      currentpage.classList.add('fadein')
+      setTimeout(() => {
+        currentpage.classList.remove('fadein')
+      }, 500);
+    }))
+  </script>
+</body>
+</html>
